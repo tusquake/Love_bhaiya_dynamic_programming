@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int helper(int ind, vector<int>& nums, int n, vector<int> &dp){
+        if(ind>=n)return 0;
+        if(dp[ind]!=-1)return dp[ind];
+        int incl = 0 + helper(ind+1, nums, n, dp);
+        int excl = nums[ind] + helper(ind+2, nums, n, dp);
+        dp[ind] = max(incl , excl);
+        return dp[ind];
+    }
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> dp(nums.size()+1,-1);
+        return helper(0,nums,n,dp);
+    }
+};
